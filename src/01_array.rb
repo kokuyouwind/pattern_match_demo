@@ -2,7 +2,7 @@
 puts "basic pattern"
 case [1, 2, 3]
 in [2, _, _]
-  fail
+  fail # マッチしない
 in [1, x, y]
   puts "x: #{x}, y: #{y}" # => x: 2, y: 3
 end
