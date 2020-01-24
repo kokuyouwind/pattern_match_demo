@@ -1,23 +1,34 @@
-puts 'abstract syntax tree'
+require 'active_pattern'
+
+puts 'abstract syntax tree with active pattern'
+
+module Node
+  extend ActivePattern::Context[RubyVM::AbstractSyntaxTree::Node]
+
+  Scope = pattern { type == :SCOPE && children }
+  OpCall = pattern { type == :OPCALL && children }
+  List = pattern { type == :LIST && children }
+  Literal = pattern { type == :LIT && children }
+end
 
 def print_tree(node, indent = 0)
   print '| ' * indent
 
-  case [node&.type, node&.children]
-  in [:SCOPE, [_, _, n1]]
+  case node
+  in Node::Scope[_, _, n1]
     puts 'scope'
     print_tree(n1, indent + 1)
-  in [:OPCALL, [n1, op, n2]]
+  in Node::OpCall[n1, op, n2]
     puts op.to_s
     print_tree(n1, indent + 1)
     print_tree(n2, indent + 1)
-  in [:LIST, [h, t]]
+  in Node::List[h, t]
     puts 'cons'
     print_tree(h, indent + 1)
     print_tree(t, indent + 1)
-  in [:LIT, [lit]]
+  in Node::Literal[lit]
     puts lit.to_s
-  in [nil, _]
+  in nil
     puts 'nil'
   end
 end
