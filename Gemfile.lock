@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    active_pattern (1.0.0)
+    active_pattern (1.1.0)
     method_matchable (1.0.0)
 
 PLATFORMS
