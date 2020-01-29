@@ -7,9 +7,13 @@ Rubyパターンマッチの基本的な機能と、[ActivePattern gem](https://
 
 ## Usage
 
-標準ではパターンマッチに関する警告が大量にでるので、`-W0`オプションを付けて実行するのが望ましいです。
+標準ではパターンマッチに関する警告が大量にでるので、`-W:no-experimental`オプションを付けて実行するのが望ましいです。
 
 ```bash
 $ bundle install
-$ bundle exec ruby -W0 src/01_array.rb
+
+$ bundle exec ruby -W:no-experimental src/01_array.rb
+# or
+$ export RUBYOPT=-W:no-experimental
+$ bundle exec ruby src/01_array.rb
 ```
